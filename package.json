@@ -1,14 +1,21 @@
 {
-  "name": "AutoloaderTs",
-  "version": "0.0.1",
-  "description": "A autoloader for typescript",
-  "main": "index.ts",
-  "author": "Patrick Hollweck <patrick-hollweck@gmx.de>",
-  "license": "MIT",
-  "dependencies": {
-    "node-eval": "^2.0.0",
-    "reflect-metadata": "^0.1.12",
-    "tsconfig-paths": "^3.3.2",
-    "typescript": "^2.8.3"
-  }
+	"name": "AutoloaderTs",
+	"version": "0.0.1",
+	"description": "A autoloader for typescript",
+	"main": "index.ts",
+	"author": "Patrick Hollweck <patrick-hollweck@gmx.de>",
+	"license": "MIT",
+	"dependencies": {
+		"fast-glob": "^2.2.2",
+		"fs-extra": "^6.0.1",
+		"node-eval": "^2.0.0",
+		"typescript": "^2.8.3"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^5.0.2",
+		"@types/node": "^10.1.2",
+		"reflect-metadata": "^0.1.12",
+		"ts-node": "^6.0.5",
+		"tsconfig-paths": "^3.3.2"
+	}
 }

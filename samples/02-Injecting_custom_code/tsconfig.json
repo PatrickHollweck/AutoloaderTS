@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist",
+		"baseUrl": ".",
+
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
@@ -22,8 +23,5 @@
 		"strictNullChecks": true,
 		"target": "es6",
 		"types": ["node"]
-	},
-	"awesomeTypescriptLoaderOptions": {
-		"reportFiles": ["./node_modules"]
 	}
 }
