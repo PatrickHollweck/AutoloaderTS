@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"baseUrl": ".",
+		"checkJs": false,
+		"diagnostics": true,
+		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react",
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"pretty": true,
+		"removeComments": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"target": "es6",
+		"types": ["node"]
+	},
+	"awesomeTypescriptLoaderOptions": {
+		"reportFiles": ["./node_modules"]
+	}
+}

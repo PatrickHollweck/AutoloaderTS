@@ -1,0 +1,14 @@
+{
+  "name": "AutoloaderTs",
+  "version": "0.0.1",
+  "description": "A autoloader for typescript",
+  "main": "index.ts",
+  "author": "Patrick Hollweck <patrick-hollweck@gmx.de>",
+  "license": "MIT",
+  "dependencies": {
+    "node-eval": "^2.0.0",
+    "reflect-metadata": "^0.1.12",
+    "tsconfig-paths": "^3.3.2",
+    "typescript": "^2.8.3"
+  }
+}
