@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"outDir": "./dist",
-		"allowJs": true,
-		"allowSyntheticDefaultImports": true,
+		"allowJs": false,
+		"allowSyntheticDefaultImports": false,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
 		"checkJs": false,
@@ -17,13 +17,13 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"pretty": true,
-		"removeComments": true,
+		"removeComments": false,
 		"strict": true,
+		"declaration": true,
+		"declarationDir": "./dist",
 		"strictNullChecks": true,
 		"target": "es6",
 		"types": ["node"]
 	},
-	"awesomeTypescriptLoaderOptions": {
-		"reportFiles": ["./node_modules"]
-	}
+	"exclude": ["samples", "dist", "scripts"]
 }
