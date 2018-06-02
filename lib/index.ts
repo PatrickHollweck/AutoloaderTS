@@ -85,12 +85,11 @@ export class Autoloader {
 	}
 
 	protected async evaluate(filePath: string) {
-		if (!this.validatePath(filePath)) {
+		const jsCode = await this.getJsFromTsFile(filePath);
+
+		if (!jsCode) {
 			return;
 		}
-
-		const tsCode = await fs.readFile(filePath);
-		const jsCode = await this.transpileTypescript(tsCode.toString());
 
 		/*
 		 * Sometimes code needs things to run corretly, for example
@@ -102,7 +101,12 @@ export class Autoloader {
 		 */
 		const codeToEval = `${this.codeToInject}${jsCode}`;
 
-		const evalResult = nodeEval(codeToEval, `${process.cwd()}/${filePath}`);
+		let evalResult: any;
+		try {
+			evalResult = nodeEval(codeToEval, filePath);
+		} catch (e) {
+			throw new Error(`Could not evaluate autoloaded file ${filePath} - ERROR: \n ${e}`);
+		}
 
 		for (const exported in evalResult) {
 			if (typeof evalResult[exported] === "string") {
@@ -111,6 +115,21 @@ export class Autoloader {
 
 			this.result.exports.push(evalResult[exported]);
 		}
+	}
+
+	protected async getJsFromTsFile(filePath: string) {
+		// Ensure that the path is valid.
+		if (!this.shouldEvaluateFile(filePath)) {
+			return null;
+		}
+
+		// Make sure the filePath is absolute.
+		if (!path.isAbsolute(filePath)) {
+			filePath = path.join(process.cwd(), filePath);
+		}
+
+		const tsCode = await fs.readFile(filePath);
+		return await this.transpileTypescript(tsCode.toString());
 	}
 
 	protected async transpileTypescript(tsCode: string) {
@@ -128,8 +147,10 @@ export class Autoloader {
 		return `${directory}/${file}`;
 	}
 
-	protected validatePath(filePath: string) {
-		if (path.extname(filePath) !== ".ts") {
+	protected shouldEvaluateFile(filePath: string) {
+		const fileExtension = path.extname(filePath);
+
+		if (fileExtension === "" || fileExtension !== ".ts") {
 			return false;
 		}
 
