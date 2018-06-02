@@ -76,6 +76,10 @@ export class Autoloader {
 	 * @param options Custom glob options
 	 */
 	public async fromGlob(...patterns: string[]) {
+		patterns = patterns.map(pattern => {
+			return pattern.replace("\\", "/");
+		});
+
 		await glob(patterns).then(async files => {
 			for (const file of files) {
 				await this.evaluate(file.toString());
