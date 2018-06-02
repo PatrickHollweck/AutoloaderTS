@@ -58,11 +58,6 @@ export class Autoloader {
 
 			for (const file of files) {
 				const filePath = this.formatPath(directory, file);
-
-				if (path.extname(filePath) !== ".ts") {
-					continue;
-				}
-
 				await this.evaluate(filePath);
 			}
 		}
@@ -90,6 +85,10 @@ export class Autoloader {
 	}
 
 	protected async evaluate(filePath: string) {
+		if (!this.validatePath(filePath)) {
+			return;
+		}
+
 		const tsCode = await fs.readFile(filePath);
 		const jsCode = await this.transpileTypescript(tsCode.toString());
 
@@ -127,5 +126,13 @@ export class Autoloader {
 
 	protected formatPath(directory: string, file: string) {
 		return `${directory}/${file}`;
+	}
+
+	protected validatePath(filePath: string) {
+		if (path.extname(filePath) !== ".ts") {
+			return false;
+		}
+
+		return true;
 	}
 }
