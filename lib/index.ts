@@ -1,4 +1,5 @@
 import * as fs from "fs-extra";
+import * as path from "path";
 import * as glob from "fast-glob";
 import * as typescript from "typescript";
 
@@ -57,6 +58,11 @@ export class Autoloader {
 
 			for (const file of files) {
 				const filePath = this.formatPath(directory, file);
+
+				if (path.extname(filePath) !== ".ts") {
+					continue;
+				}
+
 				await this.evaluate(filePath);
 			}
 		}
