@@ -93,9 +93,13 @@ export class Autoloader {
 		 */
 		const codeToEval = `${this.codeToInject}${jsCode}`;
 
-		const evalResult = nodeEval(codeToEval, filePath);
+		const evalResult = nodeEval(codeToEval, `${process.cwd()}/${filePath}`);
 
 		for (const exported in evalResult) {
+			if (typeof evalResult[exported] === "string") {
+				continue;
+			}
+
 			this.result.exports.push(evalResult[exported]);
 		}
 	}
