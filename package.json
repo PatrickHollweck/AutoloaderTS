@@ -19,16 +19,16 @@
 		"fast-glob": "^2.2.2",
 		"fs-extra": "^6.0.1",
 		"node-eval": "^2.0.0",
-		"typescript": "^2.9.1"
+		"typescript": "^2.9.2"
 	},
 	"devDependencies": {
-		"@types/fs-extra": "^5.0.2",
-		"@types/node": "^10.3.0",
+		"@types/fs-extra": "^5.0.3",
+		"@types/node": "^10.3.3",
 		"@types/shelljs": "^0.8.0",
 		"consola": "^1.4.1",
 		"reflect-metadata": "^0.1.12",
 		"shelljs": "^0.8.2",
-		"ts-node": "^6.0.5",
-		"tsconfig-paths": "^3.3.2"
+		"ts-node": "^6.1.1",
+		"tsconfig-paths": "^3.4.0"
 	}
 }

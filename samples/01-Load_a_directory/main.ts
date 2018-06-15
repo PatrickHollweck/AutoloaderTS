@@ -25,14 +25,17 @@ import { isExportDeclaration } from "typescript";
 // Make a async iife
 (async () => {
 	// Initialize the loader
-	const loader = await Autoloader.make();
+	const loader = await Autoloader.nodeEval();
 
 	// Load the directory - Returns the exports of the file
 	await loader.fromDirectories(`${__dirname}/autoload`);
-	console.log("Autoload Result --- ", loader.result);
+
+	// Get the result of the loader
+	const result = loader.getResult();
+	console.log("Autoload Result --- ", result);
 
 	// Demonstrate that all files are loaded, by checking their metadata value
-	for (const exported of loader.result.exports) {
+	for (const exported of result.exports) {
 		// Get and log the metadata
 		const metadata: string = Reflect.getMetadata(MetdataKey, exported);
 		console.log("Metadata of module --- ", metadata);

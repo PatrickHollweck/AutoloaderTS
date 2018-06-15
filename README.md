@@ -19,6 +19,40 @@ compiler plugins like `tsconfig-paths`.
 
 ---
 
+## Loader Types
+
+There are 2 kinds of loaders this lib implements.
+
+1.  DynamicImport-Autoloader (Recommended)
+
+    This Autoloader uses the `import(PATH)` function for import.
+
+    ```ts
+    const loader = Autoloader.dynamicImport();
+    ```
+
+2.  NodeEval-Autoloader
+
+    This Autoloader uses the "node-eval" lib and uses the fs api to load and dynamically invoke files.
+
+    > The ? after the parameter means "optional"
+
+    ```ts
+    const loader = Autoloader.nodeEval(customCompilerOptions?, tsConfigFilePath?);
+    ```
+
+You can instantiate one of the other by choosing the correct main `AutoloaderTS` method.
+For one or the other you may have to pass some parameters.
+
+### ATTENTION: Schemantics!
+
+What I mean by this is: On the one loader you may need to pass a absolute path and on the other
+you can pass both a relative and a absolute path!
+
+Even tho both loader have the `SAME API!` the schemantics may not be the same!
+I hope to implement libary level compatability layers in the future, so both can be used
+as a "drop-in" replacement.
+
 #### Example
 
 To use the autoloader you first need to create a instance of it. Most of the library is async so make sure to handle it!
@@ -26,7 +60,7 @@ To use the autoloader you first need to create a instance of it. Most of the lib
 ```ts
 import { Autoloader } from "autoloader-ts";
 
-const loader = await Autoloader.make();
+const loader = await Autoloader.nodeEval();
 ```
 
 Then you can use the instance methods to load files. There are 2 main ways to load files.
@@ -112,7 +146,7 @@ Then you can just create a loader and load the classes.
 
 ```ts
 // Create the loader
-const loader = await Autoloader.make();
+const loader = await Autoloader.dynamicImport();
 
 // Load and transpile all files from app/jobs
 await loader.fromDirectories(`${__dirname}/app/jobs`);

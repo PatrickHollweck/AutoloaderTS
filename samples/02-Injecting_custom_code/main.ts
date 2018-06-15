@@ -30,9 +30,9 @@ import { Autoloader } from "../../lib";
 	* concatenated with the js code, Also make sure you dont override something!
 	*/
 
-	const loader = await Autoloader.make({}, `${__dirname}/tsconfig.json`);
+	const loader = await Autoloader.nodeEval({}, `${__dirname}/tsconfig.json`);
 
-	const evaluated = await loader
+	await loader
 		.injectCode(
 			`
 				const pathsTsPlugin = require("tsconfig-paths");
@@ -44,7 +44,9 @@ import { Autoloader } from "../../lib";
 		)
 		.fromDirectories(`${__dirname}/autoload`);
 
-	evaluated.result.exports.forEach(exported => {
+	const result = loader.getResult();
+
+	result.exports.forEach(exported => {
 		new exported().doRun();
 	});
 })();
