@@ -1,6 +1,6 @@
 {
 	"name": "autoloader-ts",
-	"version": "1.1.0",
+	"version": "2.0.0",
 	"description": "A autoloader for typescript",
 	"main": "index.ts",
 	"author": "Patrick Hollweck <patrick-hollweck@gmx.de>",
