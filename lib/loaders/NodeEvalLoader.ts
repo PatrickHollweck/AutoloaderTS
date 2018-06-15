@@ -1,5 +1,6 @@
 import { Autoloader } from "./Autoloader";
 import { AutoloadResult } from "../AutloadResult";
+import { prepareGlobPatterns, getFilePathsFromGlobs, getFilePathsOfDirectories } from "../utils";
 
 import * as fs from "fs-extra";
 import * as path from "path";
@@ -54,14 +55,11 @@ export class NodeEvalAutoLoader implements Autoloader {
 	 * @param directories The directories that should be loaded
 	 */
 	public async fromDirectories(...directories: string[]) {
-		for (const directory of directories) {
-			const files = await fs.readdir(directory);
-
-			for (const file of files) {
-				const filePath = this.formatPath(directory, file);
-				await this.evaluate(filePath);
+		await getFilePathsOfDirectories(directories).then(async paths => {
+			for (const path of paths) {
+				await this.evaluate(path);
 			}
-		}
+		});
 
 		return this;
 	}
@@ -72,13 +70,9 @@ export class NodeEvalAutoLoader implements Autoloader {
 	 * @param options Custom glob options
 	 */
 	public async fromGlob(...patterns: string[]) {
-		patterns = patterns.map(pattern => {
-			return pattern.replace("\\", "/");
-		});
-
-		await glob(patterns).then(async files => {
-			for (const file of files) {
-				await this.evaluate(file.toString());
+		await getFilePathsFromGlobs(patterns).then(async paths => {
+			for (const path of paths) {
+				await this.evaluate(path.toString());
 			}
 		});
 
@@ -146,10 +140,6 @@ export class NodeEvalAutoLoader implements Autoloader {
 		}
 
 		return transpilationResult.outputText;
-	}
-
-	protected formatPath(directory: string, file: string) {
-		return `${directory}/${file}`;
 	}
 
 	protected shouldEvaluateFile(filePath: string) {
