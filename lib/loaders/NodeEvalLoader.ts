@@ -1,15 +1,19 @@
-import { Autoloader } from "./Autoloader";
+import { Autoloader } from "../interfaces/Autoloader";
+import { CodeInjector } from "../interfaces/CodeInjector";
 import { AutoloadResult } from "../AutloadResult";
-import { prepareGlobPatterns, getFilePathsFromGlobs, getFilePathsOfDirectories } from "../utils";
+import { getFilePathsFromGlobs, getFilePathsOfDirectories } from "../utils";
 
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as glob from "fast-glob";
 import * as typescript from "typescript";
 
 import nodeEval = require("node-eval");
 
-export class NodeEvalAutoLoader implements Autoloader {
+/**
+ * A autoloader which manually reads the specified files and uses
+ * the "node-eval" library to evaluate the code.
+ */
+export class NodeEvalAutoLoader implements Autoloader, CodeInjector {
 	protected result: AutoloadResult;
 
 	protected tsConfig: typescript.TranspileOptions;
