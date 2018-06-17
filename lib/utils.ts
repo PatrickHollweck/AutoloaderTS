@@ -1,4 +1,5 @@
 import * as glob from "fast-glob";
+import * as path from "path";
 import * as fs from "fs";
 
 export function prepareGlobPatterns(patterns: string[]) {
@@ -13,7 +14,8 @@ export async function getFilePathsFromGlobs(patterns: string[]) {
 	for (const pattern of patterns) {
 		await glob(pattern).then(globFiles => {
 			for (const file of globFiles) {
-				files.push(formatPath(process.cwd(), file.toString()));
+				const filePath = formatPath(process.cwd(), file.toString());
+				files.push(filePath);
 			}
 		});
 	}
@@ -37,5 +39,5 @@ export async function getFilePathsOfDirectories(directories: string[]) {
 }
 
 export function formatPath(directory: string, file: string) {
-	return `${directory}/${file}`;
+	return path.resolve(directory, file);
 }
