@@ -23,7 +23,7 @@
 		"declarationDir": "./dist",
 		"strictNullChecks": true,
 		"target": "es6",
-		"types": ["node"]
+		"types": ["node", "jest"]
 	},
 	"exclude": ["samples", "dist", "scripts"]
 }

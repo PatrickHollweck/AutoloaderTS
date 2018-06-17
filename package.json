@@ -15,6 +15,10 @@
 		"type": "git",
 		"url": "https://github.com/FetzenRndy/AutoloaderTS"
 	},
+	"scripts": {
+		"test": "jest",
+		"test:dev": "jest --watch"
+	},
 	"dependencies": {
 		"fast-glob": "^2.2.2",
 		"fs-extra": "^6.0.1",
@@ -23,12 +27,32 @@
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^5.0.3",
+		"@types/jest": "^23.1.0",
 		"@types/node": "^10.3.3",
 		"@types/shelljs": "^0.8.0",
 		"consola": "^1.4.1",
+		"jest": "^23.1.0",
 		"reflect-metadata": "^0.1.12",
 		"shelljs": "^0.8.2",
+		"ts-jest": "^22.4.6",
 		"ts-node": "^6.1.1",
 		"tsconfig-paths": "^3.4.0"
+	},
+	"jest": {
+		"roots": [
+			"<rootDir>/test"
+		],
+		"transform": {
+			"^.+\\.ts?$": "ts-jest"
+		},
+		"testRegex": "(/test/.*.(test))\\.ts?$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		]
 	}
 }
