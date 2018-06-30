@@ -27,7 +27,7 @@ fs.copyFileSync("./README.md", "./dist/README.md");
 consola.success("Copied package.json to output");
 consola.start("Publishing to npm...");
 
-shell.cd("./dist");
+shell.cd("./dist/lib");
 shell.exec("npm publish");
 
 consola.success("Published!");
