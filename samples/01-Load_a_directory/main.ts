@@ -25,7 +25,7 @@ import { isExportDeclaration } from "typescript";
 // Make a async iife
 (async () => {
 	// Initialize the loader
-	const loader = await Autoloader.nodeEval();
+	const loader = await Autoloader.requireLoader();
 
 	// Load the directory - Returns the exports of the file
 	await loader.fromDirectories(`${__dirname}/autoload`);
