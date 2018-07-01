@@ -21,13 +21,14 @@ if (tscOut.includes("error")) {
 consola.success("Project compiled!");
 consola.start("Copy package.json to output files...");
 
-fs.copyFileSync("./package.json", "./dist/package.json");
-fs.copyFileSync("./README.md", "./dist/README.md");
+fs.copyFileSync("./package.json", "./dist/lib/package.json");
+fs.copyFileSync("./README.md", "./dist/lib/README.md");
 
 consola.success("Copied package.json to output");
 consola.start("Publishing to npm...");
 
 shell.cd("./dist/lib");
+
 shell.exec("npm publish");
 
 consola.success("Published!");
