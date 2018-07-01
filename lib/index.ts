@@ -5,7 +5,7 @@ import { RequireLoader } from "./loaders/RequireLoader";
 export { AutoloadResult } from "./AutloadResult";
 export { DynamicImportAutoloader, NodeEvalAutoLoader, RequireLoader };
 
-export { Autoloader as IAutoloader };
+export { Autoloader as IAutoloader } from "./interfaces/Autoloader";
 
 export class Autoloader {
 	static nodeEval = NodeEvalAutoLoader.make;
